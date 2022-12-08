@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav> 
+    <ul class="list-group"> <!--여기에 show라는 css 붙이기-->
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul> 
+
+    <div class="alert-box" id="note">알림창<button onclick="document.getElementById('note').style.display='none';">닫기</button></div>
+    <button onclick="document.getElementById('note').style.display='block';">버튼</button>
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+            
+              <form action="success.html"> 
+                <div class="my-3">
+                  <input type="text" class="form-control" id="id">
+                 </div>
+                 <div class="my-3">
+                   <input type="password" class="form-control" id="pw">
+                 </div>
+                 <button type="submit" class="btn btn-primary" id="send">전송</button>
+                 <button type="button" class="btn btn-danger" id="close">닫기</button>
+              </form> 
+            
+            
+        </div>
+    </div>
+    
+    <span class="badge bg-dark" id="dark">Dark 🔄</span>
+    <button id="login">login</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+      //토글버튼 누르면 리스트 보여주기
+      document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
+        document.getElementsByClassName('list-group')[0].classList.toggle('show'); //list-group 클래스에 show 붙이기
+      })
+      //로그인 버튼 누르면 모달 창 띄우기
+      document.getElementById('login').addEventListener('click',function(){
+            document.querySelector('.black-bg').classList.add('show-modal');
+        })
+      //로그인시 닫기 버튼 누르면 닫기
+      document.getElementById('close').addEventListener('click', function(){
+        document.querySelector('.black-bg').style.visibility='hidden';
+      });
+      //dark mode 변경
+      var count = 0;
+      
+      $('.badge').on('click', function(){
+        count++;
+        if(count%2==1){
+          $('.badge').html('Light🔄')
+          $('.dark')
+        }
+        else {
+          $('.badge').html('dark🔄')
+        }
+      });
+      
+
+      /* input태그 안에 값이 변할때마다 실행됨
+      document.getElementById('id').addEventListener('input', function(){
+        console.log('안녕')
+      });
+      */
+      
+
+      // $('#send').on('click', functuon(){}) or  $('form').on('submit', functuon(){})
+      $('form').on('submit', function(e){
+        if(document.getElementById('id').value ==''){
+          alert('아이디 입력하세요');
+          e.preventDefault();
+        }
+        if(document.getElementById('pw').value ==''){
+          alert('비번을 입력하세요');
+          e.preventDefault();
+        }
+        if(1<document.getElementById('pw').value.length < 6){
+          alert('더길게입력');
+          e.preventDefault();
+        }
+      });
+    </script>
+
+   
+    
+  </body>
+</html>
