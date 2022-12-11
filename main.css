@@ -37,3 +37,15 @@
     display:block;
     
 }
+.slide-container {
+    width: 300vw; /*화면의 3배*/
+    transition: all 1s;
+    /*transform : translateX(-100vw); 넘겼을때 최종화면(월할때 부착해야함)*/
+}
+.slide-box {
+    width:100vw;
+    float: left;
+}
+.slide-box img {
+    width:100%;
+}

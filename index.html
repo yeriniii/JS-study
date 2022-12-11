@@ -47,8 +47,92 @@
     
     <span class="badge bg-dark" id="dark">Dark 🔄</span>
     <button id="login">login</button>
+
+    <div class="alert alert-danger">
+      <span id="sec">5</span>초 이내 구매시 사은품 증정!  <!--5초 후에 제거해보기-->
+    </div>
+    <!--이미지 슬라이드-->
+  <div style="overflow:hidden"> <!--넘치는요소 숨기기(스크롤 바 안생기게)-->
+    <div class="slide-container">
+      <div class="slide-box">
+        <img src="car1.png">
+      </div>
+      <div class="slide-box">
+        <img src="car2.png">
+      </div>
+      <div class="slide-box">
+        <img src="car3.png">
+      </div>
+    </div>
+  </div>
+  <button class="slide-1">1</button>
+  <button class="slide-2">2</button>
+  <button class="slide-3">3</button>
+  <button class="next">다음</button>
+  <button class="before">이전</button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
     <script>
+      document.querySelector('.slide-2').addEventListener('click',function(){
+        document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+      })
+      document.querySelector('.slide-3').addEventListener('click',function(){
+        document.querySelector('.slide-container').style.transform = 'translateX(-200vw)';
+      })
+      document.querySelector('.slide-1').addEventListener('click',function(){
+        document.querySelector('.slide-container').style.transform = 'translateX(0vw)';
+      })
+      var 지금사진 = 1;
+      document.querySelector('.next').addEventListener('click', function(){
+        if (지금사진 ==1) {
+          document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+          지금사진++;
+        }
+        else if(지금사진==2) {
+          document.querySelector('.slide-container').style.transform = 'translateX(-200vw)';
+          지금사진++;
+        }
+        else {
+          document.querySelector('.slide-container').style.transform = 'translateX(0vw)';
+          지금사진=1;
+        }
+      });
+      document.querySelector('.before').addEventListener('click', function(){
+        if (지금사진 ==3) {
+          document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+          지금사진--;
+        }
+        else if(지금사진==2) {
+          document.querySelector('.slide-container').style.transform = 'translateX(0vw)';
+          지금사진--;
+        }
+        else {
+          document.querySelector('.slide-container').style.transform = 'translateX(-200vw)';
+          지금사진=3;
+        }
+      });
+      //5라는 문자를 1초마다 1씩 감소시키기 0되면 div안보이게 처리
+      var num=5; //변수 이름 겹치면 안된다
+      setInterval(function() {
+        num--;
+        if(num>0){
+          document.querySelector('#sec').innerHTML = num;
+        }
+        else if(num==0){
+          $('.alert').hide();
+        }
+        
+      },1000);
+      
+      //timeout function
+      /*setTimeout(function(){
+        $('.alert').hide();
+      }, 5000)*/
+
+      //setinterval function 1초'마다'실행
+      /*setInterval(function(){
+        console.log('hi');
+      },1000)*/
       //토글버튼 누르면 리스트 보여주기
       document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
         document.getElementsByClassName('list-group')[0].classList.toggle('show'); //list-group 클래스에 show 붙이기
@@ -89,6 +173,14 @@
           alert('아이디 입력하세요');
           e.preventDefault();
         }
+        if(/\S+@\S+\.\S+/.test(document.getElementById('id').value)==false) {
+          alert('이메일형식아님');
+          e.preventDefault();
+        }
+        if(/[A-Z]/.test(document.getElementById('pw').value)==false) {
+          alert('대문자없음');
+          e.preventDefault();
+        }
         if(document.getElementById('pw').value ==''){
           alert('비번을 입력하세요');
           e.preventDefault();
@@ -98,6 +190,9 @@
           e.preventDefault();
         }
       });
+
+      //이미지 슬라이드 만들기
+
     </script>
 
    
