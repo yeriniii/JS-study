@@ -8,14 +8,28 @@
     <link href="main.css" rel="stylesheet">
   </head>
   <body>
+    
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">Shop</span>
+        <span class="badge bg-dark" id="dark">Dark 🔄</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav> 
+    <script>
+      window.addEventListener('scroll',function(){
+        if (window.scrollY > 100) {
+          document.querySelector('.navbar-brand').style.fontSize ='20px';
+        }
+        else {
+          document.querySelector('.navbar-brand').style.fontSize ='30px';
+        }
+      });
+    </script>
+
+
     <ul class="list-group"> <!--여기에 show라는 css 붙이기-->
       <li class="list-group-item">An item</li>
       <li class="list-group-item">A second item</li>
@@ -23,6 +37,22 @@
       <li class="list-group-item">A fourth item</li>
       <li class="list-group-item">And a fifth one</li>
     </ul> 
+
+    <div class="bar">
+      <div class="bar-fill"></div>
+    </div>
+    <script>
+      
+      window.addEventListener('scroll',function(){
+        var read= window.scrollY;
+        var all= document.querySelector('html').scrollHeight;
+        var 페이지높이= document.documentElement.clientHeight;
+        var 페이지스크롤퍼센트= (read/(all-페이지높이))*100;
+        document.querySelector('.bar').style.width=페이지스크롤퍼센트+'%';
+        
+      })
+      
+    </script>
 
     <div class="alert-box" id="note">알림창<button onclick="document.getElementById('note').style.display='none';">닫기</button></div>
     <button onclick="document.getElementById('note').style.display='block';">버튼</button>
@@ -44,8 +74,15 @@
             
         </div>
     </div>
-    
-    <span class="badge bg-dark" id="dark">Dark 🔄</span>
+    <script>
+      document.querySelector('.black-bg').addEventListener('click',function(e){
+        var click=document.querySelector('.black-bg')
+        if(e.target==click){
+          click.classList.remove('show-modal');
+        }
+      });
+    </script>
+
     <button id="login">login</button>
 
     <div class="alert alert-danger">
@@ -71,8 +108,24 @@
   <button class="next">다음</button>
   <button class="before">이전</button>
 
+  <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+  </div> 
+  <script> //div의 스크롤 바 내린양 + 눈에보이는 div높이 == div의 실제 높이
+    document.querySelector('.lorem').addEventListener('scroll',function(){
+      var 스크롤양 = document.querySelector('.lorem').scrollTop;
+      var divheight=document.querySelector('.lorem').scrollHeight;
+      var 높이 = document.querySelector('.lorem').clientHeight;
+      if(스크롤양+높이>=divheight){
+        alert('다 내림');
+      }
+    });
+  </script>
+
+  <div style="height: 1000px"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
     <script>
+
       document.querySelector('.slide-2').addEventListener('click',function(){
         document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
       })
@@ -139,11 +192,11 @@
       })
       //로그인 버튼 누르면 모달 창 띄우기
       document.getElementById('login').addEventListener('click',function(){
-            document.querySelector('.black-bg').classList.add('show-modal');
-        })
+          document.querySelector('.black-bg').classList.add('show-modal');
+      })
       //로그인시 닫기 버튼 누르면 닫기
       document.getElementById('close').addEventListener('click', function(){
-        document.querySelector('.black-bg').style.visibility='hidden';
+        document.querySelector('.black-bg').classList.remove('show-modal');
       });
       //dark mode 변경
       var count = 0;
