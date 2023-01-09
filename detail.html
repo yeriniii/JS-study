@@ -9,6 +9,77 @@
   </head>
   <body>
 
+    <div class="container mt-3">
+      <div class="card p-3">
+        <span class="car-title">상품명</span>
+        <span class="car-price">가격</span>
+      </div>
+    </div>
+
+    <form class="container my-5 form-group">
+      <p>상품선택</p>
+      <select class="form-select mt-2">
+        <option>모자</option>
+        <option>셔츠</option>
+        <option>바지</option>
+      </select>
+      <select class="form-select mt-2 form-hide"> <!--안보이게 숨기기-->
+        <option>90</option>
+        <option>95</option>
+        <option>100</option>
+      </select>
+    </form>
+
+    <div id="test"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!---
+    <script> //<div> 안에 <p>태그를 생성하려면
+      var a = document.createElement('p'); //html자료하나생성
+      a.innerHTML='안녕';
+      document.querySelector('#test').appendChild(a);
+
+      var template='<p>안녕</p>';
+      document.querySelector('#test').insertAdjacentHTML('beforeend',template);
+    </script>
+    -->
+    <script>
+
+      var pants=[28,30,32]; //가정 데이터
+      var shirts=[90,95,100];
+
+        //<input>의 값 변경시마다 input이벤트 발동
+      $('.form-select').eq(0).on('input', function(){  //셔츠 선택하면 아래 사이즈선택표 나오기
+        var value = $('.form-select').eq(0).val();  
+        if(value=='셔츠'){
+          $('.form-select').eq(1).removeClass('form-hide');
+          $('.form-select').eq(1).html('');
+          shirts.forEach(function(item){
+            $('.form-select').eq(1).append(`<option>${item}</option>`);
+          });
+        }
+        else if(value=='모자'){
+          $('.form-select').eq(1).addClass('form-hide');
+        }
+        else if(value=='바지'){
+          $('.form-select').eq(1).removeClass('form-hide');
+          $('.form-select').eq(1).html(''); //기존 html삭제(대체)
+          pants.forEach((item) => { //foreach의 콜백함수의 파라미터 a / arrow function
+            $('.form-select').eq(1).append(`<option>${item}</option>`);
+          });
+        }
+      })
+
+    
+    </script>
+
+
+    <script>
+      var car = ['소나타',50000,'white'] //array 자료형
+      var car2 = { name: '소나타', price: [50000, 3000,4000] } //object 자료형 key:value
+      document.querySelector('.car-title').innerHTML=car2.name;
+      document.querySelector('.car-price').innerHTML=car2.price[0];
+    </script>
 
     <div class="container mt-5">
         <ul class="list">
@@ -26,9 +97,11 @@
             <p>배송정보입니다. shipping</p>
         </div>
     </div>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="tab.js"></script>
     
     
   </body>
+  
 </html>

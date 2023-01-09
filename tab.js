@@ -25,4 +25,3 @@ function opentab(num){
     $('.tab-content').removeClass('show');
     $('.tab-content').eq(num).addClass('show');
 }
-
