@@ -55,13 +55,12 @@
         else if(value=='바지'){
           $('.form-select').eq(1).removeClass('form-hide');
           $('.form-select').eq(1).html(''); //기존 html삭제(대체)
-          pants.forEach((item) => { //foreach의 콜백함수의 파라미터 a / arrow function
+          pants.forEach((item) => { //foreach의 콜백함수의 파라미터 item / arrow function
             $('.form-select').eq(1).append(`<option>${item}</option>`);
           });
         }
       })
-
-    
+ 
     </script>
 
 
