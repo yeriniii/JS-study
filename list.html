@@ -26,13 +26,33 @@
       </script> 
       <script>
         //document.querySelector('.row').insertAdjacentHTML('beforeend',a);
+        
         products.forEach((b,i) => {
             var a=`<div class="col-sm-4">
               <img src="https://via.placeholder.com/600" class="w-100">
               <h5>${b.title}</h5>
-              <p>가격 :${b.price}</p> </div>`;
+              <p>가격 :${b.price}</p>
+              <button class="buy">구매</button>
+              </div>`;
             document.querySelector('.row').insertAdjacentHTML('beforeend',a);
-        })
+        });
+        $('.buy').click(function(e){
+            var title= $(e.target).siblings('h5').text();
+            if(localStorage.getItem('cart') !==null){
+                if(JSON.parse(localStorage.getItem('cart'))==title){
+                    console.log('중복');
+                }
+                else{
+                    var modi=JSON.parse(localStorage.cart);
+                    modi.push(title);
+                    localStorage.setItem('cart',JSON.stringify(modi));
+                }
+            }
+            else {
+                localStorage.setItem('cart',JSON.stringify([title]));
+            }
+        });
+        
       </script>
 
     <div class="container">
